@@ -12,11 +12,17 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
-
-        return response()->json([
-            'status' => 200,
-            'products' => $products,
-        ], 200);
+        if($products ->count()>0){
+            return response()->json([
+                'status' => 200,
+                'products' => $products,
+            ], 200);
+        }else{
+            return response()->json([
+                'status' => 404,
+                'message' => 'No Records Found'
+            ], 404);
+        }
     }
 
     public function store(Request $request)
