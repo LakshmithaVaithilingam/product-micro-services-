@@ -88,7 +88,8 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
-        $products = Product::find($id);
+        //$products = Product::find($id);
+        $products = Product::where('products_id', $id)->first();
 
         if (!$products) {
             return response()->json([
@@ -98,15 +99,16 @@ class ProductController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'name' => 'required|max:191|unique:products',
-            'description' => 'required|string',
-            'quantity' => 'required|integer',
-            'size' => 'required|string|max:255',
-            'color' => 'required|string|max:255',
-            'price' => 'required|numeric',
-            'images' => 'required|array',
-            'category_id' => 'required|exists:category,category_id',
-            'subcategory_id' => 'required|exists:subcategory,subcategory_id',
+            'name' => 'sometimes|required|max:191|unique:products',
+            'description' => 'sometimes|required|string',
+            'quantity' => 'sometimes|required|integer',
+            'size' => 'sometimes|required|string|max:255',
+            'color' => 'sometimes|required|string|max:255',
+            'price' => 'sometimes|required|numeric',
+            //'images' => 'required|json',
+            'images' => 'sometimes|required|array',
+            'category_id' => 'sometimes|required|exists:category,category_id',
+            'subcategory_id' => 'sometimes|required|exists:subcategory,subcategory_id',
         ]);
 
         if ($validator->fails()) {
@@ -124,6 +126,7 @@ class ProductController extends Controller
                 'size' => $request->input('size'),
                 'color' => $request->input('color'),
                 'price' => $request->input('price'),
+                //'images' => json_decode($request->input('images'), true),
                 'images' => $request->input('images'),
                 'category_id' => $request->input('category_id'),
                 'subcategory_id' => $request->input('subcategory_id'),
