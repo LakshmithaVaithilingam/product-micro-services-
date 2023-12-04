@@ -35,8 +35,8 @@ class ProductController extends Controller
             'color' => 'required|string|max:255',
             'price' => 'required|numeric',
             'images' => 'required|json',
-            'category_id' => 'required|exists:category,id',
-            'subcategory_id' => 'required|exists:subcategory,id',
+            'category_id' => 'required|exists:category,category_id',
+            'subcategory_id' => 'required|exists:subcategory,subcategory_id',
 
         ]);
 
@@ -102,8 +102,8 @@ class ProductController extends Controller
             'color' => 'required|string|max:255',
             'price' => 'required|numeric',
             'images' => 'required|json',
-            'category_id' => 'required|exists:category,id',
-            'subcategory_id' => 'required|exists:subcategory,id',
+            'category_id' => 'required|exists:category,category_id',
+            'subcategory_id' => 'required|exists:subcategory,subcategory_id',
         ]);
 
         if ($validator->fails()) {
