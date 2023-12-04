@@ -70,7 +70,8 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        $products = Product::find($id);
+        //$products = Product::find($id);
+        $products = Product::where('products_id', $id)->first();
 
         if ($products) {
             return response()->json([
