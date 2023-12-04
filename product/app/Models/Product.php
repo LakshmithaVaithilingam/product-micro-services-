@@ -10,6 +10,9 @@ class Product extends Model
     use HasFactory;
     protected $table = 'products';
 
+    //update issue 
+    protected $primaryKey = 'products_id';
+
     //new added
     protected $casts = [
         'images' => 'array',
