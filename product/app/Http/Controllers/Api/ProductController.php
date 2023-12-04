@@ -34,7 +34,8 @@ class ProductController extends Controller
             'size' => 'required|string|max:255',
             'color' => 'required|string|max:255',
             'price' => 'required|numeric',
-            'images' => 'required|json',
+            //'images' => 'required|json',
+            'images' => 'required|array',
             'category_id' => 'required|exists:category,category_id',
             'subcategory_id' => 'required|exists:subcategory,subcategory_id',
 
@@ -54,7 +55,8 @@ class ProductController extends Controller
             'size' => $request->input('size'),
             'color' => $request->input('color'),
             'price' => $request->input('price'),
-            'images' => json_decode($request->input('images'), true),
+            //'images' => json_decode($request->input('images'), true),
+            'images' => $request->input('images'),
             'category_id' => $request->input('category_id'),
             'subcategory_id' => $request->input('subcategory_id'),
         ]);
@@ -101,7 +103,7 @@ class ProductController extends Controller
             'size' => 'required|string|max:255',
             'color' => 'required|string|max:255',
             'price' => 'required|numeric',
-            'images' => 'required|json',
+            'images' => 'required|array',
             'category_id' => 'required|exists:category,category_id',
             'subcategory_id' => 'required|exists:subcategory,subcategory_id',
         ]);
@@ -121,7 +123,7 @@ class ProductController extends Controller
                 'size' => $request->input('size'),
                 'color' => $request->input('color'),
                 'price' => $request->input('price'),
-                'images' => json_decode($request->input('images'), true),
+                'images' => $request->input('images'),
                 'category_id' => $request->input('category_id'),
                 'subcategory_id' => $request->input('subcategory_id'),
             ]);
