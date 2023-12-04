@@ -23,7 +23,7 @@ class SubcategoryController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:191|unique:subcategory',
-            'category_id' => 'required|exists:category,id',
+            'category_id' => 'required|exists:category,category_id',
         ]);
 
         if ($validator->fails()) {
