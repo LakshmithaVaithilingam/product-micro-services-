@@ -165,7 +165,8 @@ class ProductController extends Controller
 
     public function destroy($id)
     {
-        $products = Product::find($id);
+        //$products = Product::find($id);
+        $products = Product::where('products_id', $id)->first();
 
         if ($products) {
             $products->delete();
@@ -180,5 +181,6 @@ class ProductController extends Controller
                 'message' => 'No such product found',
             ], 404);
         }
-    }
+
+}       
 }
