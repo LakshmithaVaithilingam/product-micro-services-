@@ -133,7 +133,7 @@ class CategoryController extends Controller
 }
 
 
-    /*public function destroy($id)
+    public function destroy($id)
     {
         //$category = Category::find($id);
         $category = Category::where('category_id', $id)->first();
@@ -151,9 +151,9 @@ class CategoryController extends Controller
                 'message' => 'No such category found',
             ], 404);
         }
-    }*/
+    }
 
-    public function destroy($id)
+    /*public function destroy($id)
     {
         //$category = Category::where('category_id', $id)->findOrFail();
         $category = Category::where('category_id', $id)->findOrFail($id);
@@ -164,5 +164,5 @@ class CategoryController extends Controller
             'status' => 204,
             'message' => 'Category deleted successfully',
         ], 204);
-    }
+    }*/
 }
