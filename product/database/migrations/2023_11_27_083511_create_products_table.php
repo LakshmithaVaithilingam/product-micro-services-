@@ -22,12 +22,12 @@ return new class extends Migration
             $table->json('images');
 
             $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('category_id')->on('category');
+            $table->foreign('category_id')->references('category_id')->on('category')->onDelete('cascade');
             //foreign key
 
 
             $table->unsignedBigInteger('subcategory_id');
-            $table->foreign('subcategory_id')->references('subcategory_id')->on('subcategory');
+            $table->foreign('subcategory_id')->references('subcategory_id')->on('subcategory')->onDelete('cascade');
 
             $table->timestamps();
         });
