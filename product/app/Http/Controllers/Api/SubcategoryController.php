@@ -64,7 +64,8 @@ class SubcategoryController extends Controller
 
     public function update(Request $request, $id)
     {
-        $subcategory = Subcategory::find($id);
+        //$subcategory = Subcategory::find($id);
+        $subcategory = Subcategory::where('subcategory_id', $id)->first();
 
         if (!$subcategory) {
             return response()->json([
@@ -74,8 +75,8 @@ class SubcategoryController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'name' => 'required|max:191|unique:subcategory,name,' . $id,
-            'category_id' => 'required|exists:category,id',
+            'name' => 'sometimes|required|max:191|unique:category',
+            'category_id' => 'sometimes|required|exists:category,category_id',
         ]);
 
         if ($validator->fails()) {
@@ -87,8 +88,8 @@ class SubcategoryController extends Controller
 
         try {
             $subcategory->update([
-                'name' => $request->name,
-                'category_id' => $request->category_id,
+                'name' => $request->input('name'),
+                'category_id' => $request->input('category_id'),
             ]);
 
             return response()->json([
