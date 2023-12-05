@@ -91,7 +91,8 @@ class CategoryController extends Controller
 
     public function update(Request $request, $id)
 {
-    $category = Category::find($id);
+    //$category = Category::find($id);
+    $category = Category::where('category_id', $id)->first();
 
     if (!$category) {
         return response()->json([
@@ -101,7 +102,7 @@ class CategoryController extends Controller
     }
 
     $validator = Validator::make($request->all(), [
-        'name' => 'required|max:191|unique:category,name,' . $id,
+        'name' => 'sometimes|required|max:191|unique:category',
     ]);
 
     if ($validator->fails()) {
@@ -114,7 +115,7 @@ class CategoryController extends Controller
 
     try {
         $category->update([
-            'name' => $request->name,
+            'name' => $request->input('name'),
         ]);
 
         return response()->json([
