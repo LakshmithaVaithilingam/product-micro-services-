@@ -56,6 +56,7 @@ class CategoryController extends Controller
         }
     }
 
+
     public function show($id)
     {
         $category = Category::find($id);
@@ -137,7 +138,6 @@ class CategoryController extends Controller
     {
         //$category = Category::find($id);
         $category = Category::where('category_id', $id)->first();
-
         if ($category) {
             $category->delete();
 
