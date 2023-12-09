@@ -104,6 +104,8 @@ class CategoryController extends Controller
 
     $validator = Validator::make($request->all(), [
         'name' => 'sometimes|required|max:191|unique:category',
+        //'name' => 'sometimes|required|max:191|unique:category,name,' . $category->id,
+
     ]);
 
     if ($validator->fails()) {
