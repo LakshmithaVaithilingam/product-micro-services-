@@ -21,6 +21,7 @@ class SubcategoryController extends Controller
 
     public function store(Request $request)
     {
+        \Log::info($request->all());
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:191|unique:subcategory',
             'category_id' => 'required|exists:category,category_id',
