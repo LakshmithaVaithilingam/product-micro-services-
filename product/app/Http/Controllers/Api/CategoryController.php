@@ -45,6 +45,7 @@ class CategoryController extends Controller
             if($category){
                 return response()->json([
                 'status' => 200,
+                'category_id' => $category->category_id,
                 'category' => $category,
             ],200);
             }else{
