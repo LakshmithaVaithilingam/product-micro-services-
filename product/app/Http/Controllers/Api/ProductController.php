@@ -27,6 +27,7 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+        \Log::info($request->all());
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:191|unique:products',
             'description' => 'required|string',
@@ -48,6 +49,13 @@ class ProductController extends Controller
             ], 422);
         }
 
+         // Handle file uploads
+        $imagePaths = [];
+        foreach ($request->file('images') as $image) {
+        $path = $image->store('images'); // 'images' is the storage disk you want to use
+        $imagePaths[] = $path;
+        } 
+
         $products = Product::create([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
@@ -55,8 +63,8 @@ class ProductController extends Controller
             'size' => $request->input('size'),
             'color' => $request->input('color'),
             'price' => $request->input('price'),
-            //'images' => json_decode($request->input('images'), true),
-            'images' => $request->input('images'),
+            //'images' => $request->input('images'),
+            'images' => $imagePaths,
             'category_id' => $request->input('category_id'),
             'subcategory_id' => $request->input('subcategory_id'),
         ]);
