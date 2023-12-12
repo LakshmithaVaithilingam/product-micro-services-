@@ -96,6 +96,7 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
+        \Log::info($request->all());
         //$products = Product::find($id);
         $products = Product::where('products_id', $id)->first();
 
@@ -125,6 +126,22 @@ class ProductController extends Controller
                 'errors' => $validator->messages(),
             ], 422);
         }
+        // Handle file uploads
+        $imagePaths = [];
+        $images = $request->file('images');
+
+        if ($images && is_array($images)) {
+            foreach ($images as $image) {
+            $path = $image->store('images'); // 'images' is the storage disk you want to use
+            $imagePaths[] = $path;
+        }
+        } else {
+        // Handle the case where 'images' is not present or not an array
+        return response()->json([
+        'status' => 422,
+        'message' => 'Images must be provided as an array in the request.',
+    ], 422);
+}
 
         try {
             $products->update([
@@ -134,8 +151,8 @@ class ProductController extends Controller
                 'size' => $request->input('size'),
                 'color' => $request->input('color'),
                 'price' => $request->input('price'),
-                //'images' => json_decode($request->input('images'), true),
-                'images' => $request->input('images'),
+                //'images' => $request->input('images'),
+                'images' => $imagePaths,
                 'category_id' => $request->input('category_id'),
                 'subcategory_id' => $request->input('subcategory_id'),
             ]);
