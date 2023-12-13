@@ -53,7 +53,7 @@ class ProductController extends Controller
         $imagePaths = [];
         foreach ($request->file('images') as $image) {
         $path = $image->store('images'); // 'images' is the storage disk you want to use
-        $imagePaths[] = $path;
+        $imagePaths[] = asset('storage/' . $path);
         } 
 
         $products = Product::create([
@@ -73,6 +73,7 @@ class ProductController extends Controller
             'status' => 201,
             'message' => 'Product created successfully',
             'product' => $products,
+            'imagePaths' => $imagePaths,
         ], 201);
     }
 
