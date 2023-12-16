@@ -207,6 +207,20 @@ class ProductController extends Controller
                 'message' => 'No such product found',
             ], 404);
         }
+    }
+    
 
-}       
+    public function getRelatedProducts($categoryId, $selectedProductId)
+    {
+        $relatedProducts = Product::where('category_id', $categoryId)
+            ->where('products_id', '!=', $selectedProductId) // Exclude the selected product itself
+            ->limit(5) // Adjust the limit as needed
+            ->get();
+
+        return response()->json([
+            'status' => 200,
+            'relatedProducts' => $relatedProducts,
+        ], 200);
+    }
+
 }

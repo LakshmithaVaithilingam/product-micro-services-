@@ -44,3 +44,4 @@ Route::get('products/{id}', [ProductController::class, 'show']);
 Route::get('products/{id}/edit', [ProductController::class, 'edit']);
 Route::put('products/{id}/edit', [ProductController::class, 'update']);
 Route::delete('products/{id}/delete', [ProductController::class, 'destroy']);
+Route::get('related-products/{categoryId}/{selectedProductId}', [ProductController::class, 'getRelatedProducts']);
