@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\SubcategoryController;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\ReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,3 +46,14 @@ Route::get('products/{id}/edit', [ProductController::class, 'edit']);
 Route::put('products/{id}/edit', [ProductController::class, 'update']);
 Route::delete('products/{id}/delete', [ProductController::class, 'destroy']);
 Route::get('related-products/{categoryId}/{selectedProductId}', [ProductController::class, 'getRelatedProducts']);
+
+// Retrieve reviews for a specific product
+Route::get('reviews/{productId}', [ReviewController::class, 'index']);
+// Store a new review
+Route::post('reviews', [ReviewController::class, 'store']);
+// Retrieve a specific review
+Route::get('reviews/{reviewId}', [ReviewController::class, 'show']);
+// Update a specific review
+Route::put('reviews/{reviewId}', [ReviewController::class, 'update']);
+// Delete a specific review
+Route::delete('reviews/{reviewId}', [ReviewController::class, 'destroy']);
