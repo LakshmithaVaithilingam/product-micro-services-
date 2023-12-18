@@ -155,17 +155,4 @@ class CategoryController extends Controller
             ], 404);
         }
     }
-
-    /*public function destroy($id)
-    {
-        //$category = Category::where('category_id', $id)->findOrFail();
-        $category = Category::where('category_id', $id)->findOrFail($id);
-
-        $category->delete();
-
-        return response()->json([
-            'status' => 204,
-            'message' => 'Category deleted successfully',
-        ], 204);
-    }*/
 }
