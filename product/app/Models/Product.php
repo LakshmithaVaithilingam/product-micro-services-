@@ -18,7 +18,7 @@ class Product extends Model
         'images' => 'array',
     ];
 
-    protected $fillable = ['name', 'description', 'quantity', 'size', 'color', 'price','images', 'category_id', 'subcategory_id'];
+    protected $fillable = ['name', 'description', 'quantity', 'size', 'color', 'price','images', 'category_id', 'subcategory_id', 'age_group', 'discount'];
 
     public function category()
     {
