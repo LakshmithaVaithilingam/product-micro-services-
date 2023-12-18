@@ -39,7 +39,8 @@ class ProductController extends Controller
             'images' => 'required|array',
             'category_id' => 'required|exists:category,category_id',
             'subcategory_id' => 'required|exists:subcategory,subcategory_id',
-
+            'age_group' => 'nullable|string|max:255',
+            'discount' => 'nullable|numeric',
         ]);
 
         if ($validator->fails()) {
@@ -67,6 +68,8 @@ class ProductController extends Controller
             'images' => $imagePaths,
             'category_id' => $request->input('category_id'),
             'subcategory_id' => $request->input('subcategory_id'),
+            'age_group' => $request->input('age_group'),
+            'discount' => $request->input('discount'),
         ]);
 
         return response()->json([
@@ -119,6 +122,8 @@ class ProductController extends Controller
             'images' => 'sometimes|required|array',
             'category_id' => 'sometimes|required|exists:category,category_id',
             'subcategory_id' => 'sometimes|required|exists:subcategory,subcategory_id',
+            'age_group' => 'nullable|string|max:255',
+            'discount' => 'nullable|numeric',
         ]);
 
         if ($validator->fails()) {
@@ -156,6 +161,8 @@ class ProductController extends Controller
                 'images' => $imagePaths,
                 'category_id' => $request->input('category_id'),
                 'subcategory_id' => $request->input('subcategory_id'),
+                'age_group' => $request->input('age_group'),
+                'discount' => $request->input('discount'),
             ]);
 
             return response()->json([
