@@ -9,20 +9,45 @@ use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::all();
-        if($products ->count()>0){
-            return response()->json([
-                'status' => 200,
-                'products' => $products,
-            ], 200);
-        }else{
-            return response()->json([
-                'status' => 404,
-                'message' => 'No Records Found'
-            ], 404);
+        // Initialize the query builder for the Product model
+        $query = Product::query();
+
+        // Apply filters if provided in the request
+
+        // Check if 'category_id' is present in the request
+        if ($request->has('category_id')) {
+            // Add a WHERE clause to filter by category_id
+            $query->where('category_id', $request->input('category_id'));
         }
+
+        // Check if 'subcategory_id' is present in the request
+        if ($request->has('subcategory_id')) {
+            // Add a WHERE clause to filter by subcategory_id
+            $query->where('subcategory_id', $request->input('subcategory_id'));
+        }
+
+        // Check if 'age_group' is present in the request
+        if ($request->has('age_group')) {
+            // Add a WHERE clause to filter by age_group
+            $query->where('age_group', $request->input('age_group'));
+        }
+
+        // Check if 'price_min' and 'price_max' are present in the request
+        if ($request->has('price_min') && $request->has('price_max')) {
+            // Add a WHERE clause to filter by price range
+            $query->whereBetween('price', [$request->input('price_min'), $request->input('price_max')]);
+        }
+
+        // Get the final set of products based on applied filters
+        $products = $query->get();
+
+        // Return the filtered products in the response
+        return response()->json([
+            'status' => 200,
+            'products' => $products,
+        ], 200);
     }
 
     public function store(Request $request)
