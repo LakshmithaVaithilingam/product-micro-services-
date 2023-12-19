@@ -36,6 +36,8 @@ Route::get('subcategory/{id}', [SubcategoryController::class, 'show']);
 Route::get('subcategory/{id}/edit', [SubcategoryController::class, 'edit']);
 Route::put('subcategory/{id}/edit', [SubcategoryController::class, 'update']);
 Route::delete('subcategory/{id}/delete', [SubcategoryController::class, 'destroy']);
+Route::get('category/{categoryId}/subcategories', [SubcategoryController::class, 'getSubcategoriesByCategory']);
+
 
 
 //products 

@@ -125,4 +125,13 @@ class SubcategoryController extends Controller
             ], 404);
         }
     }
+    public function getSubcategoriesByCategory($categoryId)
+    {
+    $subcategories = Subcategory::where('category_id', $categoryId)->get();
+
+    return response()->json([
+        'status' => 200,
+        'subcategories' => $subcategories,
+    ], 200);
+    }
 }
