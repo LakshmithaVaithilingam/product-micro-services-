@@ -78,7 +78,7 @@ class ProductController extends Controller
          // Handle file uploads
         $imagePaths = [];
         foreach ($request->file('images') as $image) {
-        $path = $image->store('images'); // 'images' is the storage disk you want to use
+        $path = $image->store('images','public'); // 'images' is the storage disk you want to use
         $imagePaths[] = asset('storage/' . $path);
         } 
 
@@ -163,7 +163,7 @@ class ProductController extends Controller
 
         if ($images && is_array($images)) {
             foreach ($images as $image) {
-            $path = $image->store('images'); // 'images' is the storage disk you want to use
+            $path = $image->store('images','public'); // 'images' is the storage disk you want to use
             $imagePaths[] = $path;
         }
         } else {
@@ -172,7 +172,9 @@ class ProductController extends Controller
         'status' => 422,
         'message' => 'Images must be provided as an array in the request.',
     ], 422);
-}
+    }
+    
+    
 
         try {
             $products->update([
